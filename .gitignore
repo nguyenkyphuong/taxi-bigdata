@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.idea/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Datasets - do not upload large raw data
+data/*
+!data/README.md
+
+# Generated outputs
+outputs/
+logs/
+*.log
+
+# Environment variables and secrets
+.env
