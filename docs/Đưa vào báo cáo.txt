@@ -1,0 +1,4 @@
+Yellow Taxi chiếm phần lớn bản ghi trong bộ dữ liệu ở cả 6 tháng.
+Tổng bản ghi cao nhất là tháng 05/2014, khoảng 16,49 triệu.
+Tổng bản ghi thấp nhất là tháng 08/2014, khoảng 14,52 triệu.
+Số bản ghi Uber tăng qua các tháng, từ 564.516 vào tháng 04 lên 1.028.136 vào tháng 09/2014.

@@ -1,0 +1,12 @@
+check,status
+all_129_files_processed,PASS
+source_inventory_matches_task4,PASS
+input_equals_accepted_plus_rejected,PASS
+rejected_union_correct,PASS
+parquet_recount_consistent,PASS
+v3_keeps_at_least_v2_accepted_rows,PASS
+all_18_month_service_pairs_present,PASS
+positive_accepted_rows_every_file,PASS
+timestamps_not_all_invalid,PASS
+correct_paper_no_bbox_policy,PASS
+original_source_size_and_mtime_recorded,PASS

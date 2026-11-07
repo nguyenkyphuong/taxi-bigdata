@@ -1,0 +1,9 @@
+{
+  "hadoop_version": "3.4.1",
+  "spark_package_version": "3.5.5",
+  "hdfs_uri": "hdfs://localhost:9000",
+  "spark_master": "local[2]",
+  "dfs_replication": 1,
+  "execution_mode": "one-node pseudo-distributed HDFS + Spark local",
+  "sample_rows_per_service": 1000
+}

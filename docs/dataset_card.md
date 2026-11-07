@@ -32,36 +32,52 @@ TLC cho biết dữ liệu chuyến đi được thu thập từ các nhà cung 
 
 Nguồn này được FiveThirtyEight công bố từ dữ liệu thu thập qua yêu cầu cung cấp thông tin đối với TLC. Đây là nguồn dữ liệu lịch sử bổ sung, không phải bộ file Uber hiện hành trên trang TLC.
 
-## 3. Phạm vi dữ liệu dự kiến
+## 3. Phạm vi dữ liệu
 
-| Mục đích | Dataset dự kiến | Phạm vi thời gian | Trạng thái |
+Đồ án tách dữ liệu thành hai nhóm theo mục tiêu thí nghiệm.
+
+| Mục đích | Dataset | Phạm vi thời gian | Trạng thái |
 |---|---|---|---|
-| Benchmark MapReduce–Spark | Yellow Taxi Trip Records | Một tháng dữ liệu được chọn sau khi kiểm tra khả năng xử lý | Chưa tải/đo thực tế |
-| Tái hiện bài toán phân loại | Yellow Taxi + Green Taxi + Uber | Tháng 4–9/2014 | Cần kiểm tra file và schema |
-| Phát hiện bất thường mở rộng | Có thể sử dụng dữ liệu chuyến taxi đã chọn | Chốt sau | Chưa triển khai |
+| Benchmark Hadoop–MapReduce và Spark | Yellow Taxi Trip Records | Tháng 01/2024 | Đã tải; đã kiểm tra metadata |
+| Tái hiện bài toán phân loại theo paper | Yellow Taxi + Green Taxi + Uber lịch sử | Tháng 4–9/2014 | Chưa xác minh đầy đủ file và schema |
+| Phát hiện bất thường mở rộng | Dữ liệu chuyến taxi được chọn | Chốt sau | Chưa triển khai |
 
-Việc sử dụng dữ liệu năm 2014 cho bài toán phân loại nhằm bám sát paper. Dataset benchmark hệ thống được lựa chọn theo yêu cầu thống kê chuyến đi, khả năng tương thích và giới hạn tài nguyên của môi trường thử nghiệm.
+### 3.1. Dataset benchmark hệ thống
+
+Tệp được chọn ban đầu là `yellow_tripdata_2024-01.parquet`, tải từ nguồn TLC chính thức. Kiểm tra metadata bằng PyArrow ghi nhận dung lượng 47,65 MB, 2.964.624 bản ghi, 19 cột và 3 row groups.
+
+Dataset này được dùng để xây dựng các tác vụ tổng hợp dữ liệu có đầu ra tương đương giữa Hadoop–MapReduce và Spark. Trước khi benchmark chính thức, cần hoàn thành kiểm tra chất lượng dữ liệu và xác định rõ các phép tính, đầu ra và cách đo thời gian.
+
+### 3.2. Dataset tái hiện bài báo
+
+Phương án dự kiến sử dụng dữ liệu Yellow Taxi, Green Taxi và Uber trong giai đoạn tháng 4–9/2014, nhằm bám sát bài toán phân loại khu vực theo dịch vụ có số lượt đón khách chiếm ưu thế trong paper tham khảo.
+
+Tính khả thi của phương án này chưa được xác nhận. Cần kiểm tra các file lịch sử thực tế, schema và khả năng xác định khu vực tương thích giữa ba nguồn dữ liệu trước khi chốt thiết kế thí nghiệm.
+
+### 3.3. Phạm vi mở rộng
+
+Phát hiện bất thường là phần mở rộng dự kiến. Dataset, tiêu chí xác định bất thường và phương pháp đánh giá sẽ được chốt ở giai đoạn thiết kế thí nghiệm riêng.
 
 ## 4. Schema và các trường dữ liệu quan trọng
 
 ### 4.1. Yellow Taxi
 
-Các trường cần khảo sát trong dữ liệu Yellow Taxi bao gồm:
+### Kết quả kiểm tra ban đầu — Yellow Taxi, tháng 01/2024
 
-| Trường | Ý nghĩa | Ứng dụng |
-|---|---|---|
-| `tpep_pickup_datetime` | Thời điểm đón khách | Thống kê theo ngày/giờ |
-| `tpep_dropoff_datetime` | Thời điểm trả khách | Tính thời lượng chuyến |
-| `PULocationID` | Mã khu vực đón | Thống kê theo khu vực |
-| `DOLocationID` | Mã khu vực trả | Thống kê theo khu vực |
-| `trip_distance` | Quãng đường chuyến đi | Thống kê quãng đường |
-| `fare_amount` | Tiền cước cơ bản | Phân tích doanh thu |
-| `tip_amount` | Tiền tip | Phân tích tiền tip |
-| `total_amount` | Tổng tiền được ghi nhận | Phân tích tổng tiền |
-| `passenger_count` | Số hành khách được báo cáo | Phân tích đặc trưng chuyến đi |
+| Thuộc tính | Kết quả |
+|---|---|
+| Tệp | `yellow_tripdata_2024-01.parquet` |
+| Dung lượng trên đĩa | 47,65 MB |
+| Số bản ghi theo Parquet metadata | 2.964.624 |
+| Số cột | 19 |
+| Số row groups | 3 |
+| Định dạng | Apache Parquet |
+| Công cụ kiểm tra | Python, PyArrow 26.0.0 |
+| Môi trường | Windows, Python virtual environment (`.venv`) |
 
-**Lưu ý:** tên trường và kiểu dữ liệu phải được xác nhận trên file thực tế trước khi viết chương trình xử lý. Schema có thể khác nhau giữa các năm.
+Các trường quan trọng đã xác nhận gồm thời gian đón/trả, mã khu vực đón/trả, quãng đường, số hành khách và các trường giá cước.
 
+**Giới hạn:** Đây mới là kết quả kiểm tra metadata. Tỷ lệ giá trị thiếu, bản ghi trùng lặp, giá trị không hợp lệ và phân bố dữ liệu chưa được đo. Chưa xem các bản ghi là hợp lệ chỉ dựa trên metadata.
 ### 4.2. Green Taxi
 
 Các trường dự kiến khảo sát gồm thời điểm đón/trả, mã khu vực đón/trả, quãng đường và các trường tiền cước. Tên trường cụ thể cần đối chiếu với Green Trips Data Dictionary và file được tải.
@@ -100,23 +116,20 @@ Các hạn chế đã biết:
 - Dữ liệu Uber lịch sử và dữ liệu TLC hiện hành có cấu trúc khác nhau.
 - Kết quả phân tích phản ánh dữ liệu được công bố, không tự động đại diện cho toàn bộ nhu cầu di chuyển thực tế của NYC.
 
-## 7. Quy mô dữ liệu và chất lượng
+## 7. Quy mô dữ liệu đã xác minh
 
-Các thông tin dưới đây phải được bổ sung sau khi tải và kiểm tra file thực tế.
-
-| Chỉ tiêu | Kết quả |
+| Chỉ tiêu | Yellow Taxi tháng 01/2024 |
 |---|---|
-| Dataset/file được chọn | Chưa chốt |
-| Khoảng thời gian thực tế | Chưa xác minh |
-| Dung lượng file tải xuống | Chưa đo |
-| Số bản ghi | Chưa đo |
-| Số cột và kiểu dữ liệu | Chưa kiểm tra |
-| Tỷ lệ thiếu theo trường | Chưa đo |
-| Số bản ghi trùng | Chưa đo |
-| Khoảng thời gian sớm nhất/muộn nhất | Chưa đo |
-| Giá trị không hợp lệ | Chưa đo |
+| Tên file | `yellow_tripdata_2024-01.parquet` |
+| Dung lượng trên đĩa | 47,65 MB |
+| Số bản ghi theo Parquet metadata | 2.964.624 |
+| Số cột | 19 |
+| Số row groups | 3 |
+| Công cụ kiểm tra | Python, PyArrow 26.0.0 |
 
-Không điền số liệu giả định vào các trường này. Kết quả chỉ được ghi sau khi chạy bước profiling trên dữ liệu đã tải.
+Các số liệu trên được lấy từ kết quả kiểm tra metadata của file đã tải. Đây chưa phải kết quả profiling chất lượng dữ liệu.
+
+Tỷ lệ giá trị thiếu, bản ghi trùng, timestamp lỗi và giá trị bất hợp lý sẽ được đo trong Task 3, với sản phẩm `notebooks/01_data_profiling.ipynb` và `reports/data_profile.md`.
 
 ## 8. Kế hoạch tiếp nhận và lưu trữ
 

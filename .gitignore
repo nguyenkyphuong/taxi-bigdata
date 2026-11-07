@@ -19,3 +19,4 @@ logs/
 
 # Environment variables and secrets
 .env
+infra/installers/hadoop-3.4.1.tar.gz

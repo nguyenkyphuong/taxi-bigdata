@@ -1,0 +1,19 @@
+﻿service,month,rows,missing_pickup_time,invalid_pickup_time,wrong_month,missing_lat,missing_lon,non_numeric_lat,non_numeric_lon,zero_gps,out_of_range_gps,outside_nyc_bbox,missing_dropoff_time,invalid_dropoff_time,sampled_rows,sample_duplicate_rows,files,gps_missing_or_nonnumeric_note,duplicate_scope,service_month_status
+green,2014-04,1309155,0,0,0,0,0,0,0,2320,0,43,0,0,13071,0,6,Columns counted independently; do not add as unique rows,1pct_hash_sample_within_each_file_only,PASS
+green,2014-05,1421503,0,0,0,0,0,0,0,2839,0,62,0,0,14229,0,4,Columns counted independently; do not add as unique rows,1pct_hash_sample_within_each_file_only,PASS
+green,2014-06,1337759,0,0,0,0,0,0,0,2739,0,66,0,0,13535,0,4,Columns counted independently; do not add as unique rows,1pct_hash_sample_within_each_file_only,PASS
+green,2014-07,1273973,0,0,0,0,0,0,0,2685,0,49,0,0,12663,0,4,Columns counted independently; do not add as unique rows,1pct_hash_sample_within_each_file_only,PASS
+green,2014-08,1344941,0,0,0,0,0,0,0,2058,0,63,0,0,13402,0,5,Columns counted independently; do not add as unique rows,1pct_hash_sample_within_each_file_only,PASS
+green,2014-09,1361893,0,0,0,0,0,0,0,1867,0,66,0,0,13546,0,3,Columns counted independently; do not add as unique rows,1pct_hash_sample_within_each_file_only,PASS
+uber,2014-04,564516,0,0,0,0,0,0,0,0,0,651,0,0,5642,71,1,Columns counted independently; do not add as unique rows,1pct_hash_sample_within_each_file_only,PASS
+uber,2014-05,652435,0,0,0,0,0,0,0,0,0,981,0,0,6495,100,1,Columns counted independently; do not add as unique rows,1pct_hash_sample_within_each_file_only,PASS
+uber,2014-06,663844,0,0,0,0,0,0,0,0,0,1216,0,0,6614,102,1,Columns counted independently; do not add as unique rows,1pct_hash_sample_within_each_file_only,PASS
+uber,2014-07,796121,0,0,0,0,0,0,0,0,0,1921,0,0,7936,141,1,Columns counted independently; do not add as unique rows,1pct_hash_sample_within_each_file_only,PASS
+uber,2014-08,829275,0,0,0,0,0,0,0,0,0,2317,0,0,8345,171,1,Columns counted independently; do not add as unique rows,1pct_hash_sample_within_each_file_only,PASS
+uber,2014-09,1028136,0,0,0,0,0,0,0,0,0,2092,0,0,10302,215,1,Columns counted independently; do not add as unique rows,1pct_hash_sample_within_each_file_only,PASS
+yellow,2014-04,14618759,0,0,0,0,0,0,0,297076,1,1184,0,0,145426,0,19,Columns counted independently; do not add as unique rows,1pct_hash_sample_within_each_file_only,PASS
+yellow,2014-05,14774041,0,0,0,0,0,0,0,352352,39,1633,0,0,147734,0,16,Columns counted independently; do not add as unique rows,1pct_hash_sample_within_each_file_only,PASS
+yellow,2014-06,13813029,0,0,0,0,0,0,0,363560,2,1362,0,0,138412,0,15,Columns counted independently; do not add as unique rows,1pct_hash_sample_within_each_file_only,PASS
+yellow,2014-07,13106365,0,0,0,0,0,0,0,350432,0,1436,0,0,131107,0,16,Columns counted independently; do not add as unique rows,1pct_hash_sample_within_each_file_only,PASS
+yellow,2014-08,12688877,0,0,0,0,0,0,0,336193,0,1221,0,0,127265,0,16,Columns counted independently; do not add as unique rows,1pct_hash_sample_within_each_file_only,PASS
+yellow,2014-09,13374016,0,0,0,0,0,0,0,262325,0,1029,0,0,134022,0,15,Columns counted independently; do not add as unique rows,1pct_hash_sample_within_each_file_only,PASS
